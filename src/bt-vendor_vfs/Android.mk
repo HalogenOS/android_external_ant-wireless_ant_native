@@ -20,7 +20,11 @@ LOCAL_CFLAGS := -g -c -W -Wall -O2
 
 # needed to pull in the header file for libbt-vendor.so
 BDROID_DIR:= system/bt
-QCOM_DIR:= $(call project-path-for,bt-vendor)/libbt-vendor
+ifeq ($(TARGET_USE_BOARD_BT_VENDOR),true)
+QCOM_DIR := hardware/qcom/bt/$(TARGET_BOARD_PLATFORM)/libbt-vendor
+else
+QCOM_DIR := $(call project-path-for,bt-vendor)/libbt-vendor
+endif
 
 # Added hci/include to give access to the header for the libbt-vendorso interface.
 LOCAL_C_INCLUDES := \
