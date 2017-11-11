@@ -23,7 +23,11 @@ BDROID_DIR:= system/bt
 ifeq ($(TARGET_USE_BOARD_BT_VENDOR),true)
 QCOM_DIR := hardware/qcom/bt/$(TARGET_BOARD_PLATFORM)/libbt-vendor
 else
+ifneq ($(TARGET_USE_BOARD_BT_VENDOR),)
+QCOM_DIR := hardware/qcom/bt/$(TARGET_USE_BOARD_BT_VENDOR)/libbt-vendor
+else
 QCOM_DIR := $(call project-path-for,bt-vendor)/libbt-vendor
+endif
 endif
 
 # Added hci/include to give access to the header for the libbt-vendorso interface.
