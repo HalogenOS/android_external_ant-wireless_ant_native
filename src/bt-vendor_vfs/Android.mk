@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+ifneq ($(call is-qcom-platform),)
 
 include $(CLEAR_VARS)
 
@@ -20,7 +21,15 @@ LOCAL_CFLAGS := -g -c -W -Wall -O2
 
 # needed to pull in the header file for libbt-vendor.so
 BDROID_DIR:= system/bt
-QCOM_DIR:= $(call project-path-for,bt-vendor)/libbt-vendor
+ifneq ($(BOARD_USES_QCOM_HARDWARE),true)
+ifneq ($(filter msm8960 msm8909 msm8992 msm8994 msm8996 msm8998 sdm845,$(TARGET_BOARD_PLATFORM)),)
+QCOM_DIR := hardware/qcom/bt/$(TARGET_BOARD_PLATFORM)/libbt-vendor
+else
+QCOM_DIR := hardware/qcom/bt-caf/libbt-vendor
+endif
+else
+QCOM_DIR := $(call project-path-for,bt-vendor)/libbt-vendor
+endif
 
 # Added hci/include to give access to the header for the libbt-vendorso interface.
 LOCAL_C_INCLUDES := \
@@ -60,3 +69,5 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libantradio
 
 include $(BUILD_SHARED_LIBRARY)
+
+endif
