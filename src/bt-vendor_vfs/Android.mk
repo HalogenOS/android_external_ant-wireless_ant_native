@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-ifneq ($(call is-qcom-platform),)
+ifneq ($(call is-qcom-hardware),)
 
 include $(CLEAR_VARS)
 
