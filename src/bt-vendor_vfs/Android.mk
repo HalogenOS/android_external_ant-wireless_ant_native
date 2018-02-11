@@ -1,4 +1,4 @@
-#
+ #
 # Copyright (C) 2011 Dynastream Innovations
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ else
 QCOM_DIR := hardware/qcom/bt-caf/libbt-vendor
 endif
 else
-QCOM_DIR := $(call project-path-for,bt-vendor)/libbt-vendor
+QCOM_DIR := hardware/qcom/bt-caf/libbt-vendor
 endif
 
 # Added hci/include to give access to the header for the libbt-vendorso interface.
